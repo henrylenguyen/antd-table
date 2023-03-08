@@ -138,11 +138,18 @@ const CustomTable = ({ columns, data, ...props }) => {
 
   return (
     <div className="usertable p-5 flex-grow rounded-lg select-none overflow-auto">
-      <Table
-        columns={columns.map((col) => ({
-          ...col,
-          ...getColumnSearchProps(col.dataIndex),
-        }))}
+       <Table
+        columns={columns.map((col) => {
+          if(col.key.toLowerCase()==="hinhanh" || col.key.toLowerCase()==="avatar"){
+             return {
+               ...col,
+             };
+          }
+          return {
+            ...col,
+            ...getColumnSearchProps(col.dataIndex),
+          };
+        })}
         dataSource={filteredData}
         scroll={{ x: "max-content", y: 500 }}
       />

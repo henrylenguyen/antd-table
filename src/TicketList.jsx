@@ -1,4 +1,5 @@
 
+import { Avatar, Image } from "antd";
 import React from "react";
 import removeVietnameseTones from "./convertVietnamese";
 import CustomTable from "./CustomTable";
@@ -15,7 +16,7 @@ const data = [
     gioChieu: "07:09",
   },
   {
-    maLichChieu: 44239,
+    maLichChieu: 44240,
     tenCumRap: "CGV - Aeon Tân Phú",
     tenRap: "Rạp 5",
     diaChi: "30 Bờ Bao Tân Thắng, Sơn Kỳ, Tân Phú",
@@ -47,7 +48,7 @@ console.log("dataIndexKey:", dataIndexKey);
 // 3. Tạo ra mảng title chứa các đối tượng title khác nhau, do mình nhập
 const dataTitle = [
   { title: "Mã lịch chiếu" },
-  { title: "Hình ảnh" },
+  { title: "Hình Ảnh" },
   { title: "Tên cụm rạp" },
   { title: "Tên rạp" },
   { title: "Địa chỉ" },
@@ -80,10 +81,29 @@ const columns = dataTitle.map(title=>{
     (item) => item.key.toLowerCase() === newTitle
   );
   // trả về mảng các đối tượng
+  if (newTitle === "hinhanh") {
+    return {
+      title: title.title,
+      dataIndex: dataIndexKeyItem.dataIndex,
+      key: dataIndexKeyItem.key,
+      render: (text)=> <Image src={text} width="100px"></Image>,
+    
+    };
+  }
+  if (newTitle === "avatar") {
+    return {
+      title: title.title,
+      dataIndex: dataIndexKeyItem.dataIndex,
+      key: dataIndexKeyItem.key,
+      render: (text)=> <Avatar src={text} size="large"></Avatar>,
+    
+    };
+  }
   return {
     title: title.title,
     dataIndex: dataIndexKeyItem.dataIndex,
     key: dataIndexKeyItem.key,
+    width: 250
   };
 })
 console.log("columns:", columns);
