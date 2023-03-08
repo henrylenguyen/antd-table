@@ -3,7 +3,9 @@ import TicketList from "./TicketList";
 
 function App() {
   
-  <TicketList></TicketList>;
+  return(
+    <TicketList></TicketList>
+  )
 }
 
 export default App
