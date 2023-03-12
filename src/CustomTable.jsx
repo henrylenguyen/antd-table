@@ -9,29 +9,7 @@ const CustomTable = ({ columns, data, ...props }) => {
   const [filteredData, setFilteredData] = useState(data);
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [loading, setLoading] = useState(false);
 
-  const handlePageChange = (page) => {
-    setLoading(true);
-    setCurrentPage(page);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  };
-
-  const handlePageSizeChange = (value) => {
-    setLoading(true);
-    setPageSize(value);
-    setCurrentPage(1);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  };
-  const indexOfLastItem = currentPage * pageSize;
-  const indexOfFirstItem = indexOfLastItem - pageSize;
-  const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   // --------------------------- TÌM KIẾM------------------------
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -153,17 +131,7 @@ const CustomTable = ({ columns, data, ...props }) => {
         dataSource={filteredData}
         scroll={{ x: "max-content", y: 500 }}
       />
-      <Pagination
-        total={data.length}
-        pageSize={pageSize}
-        current={currentPage}
-        onChange={handlePageChange}
-        showSizeChanger
-        onShowSizeChange={handlePageSizeChange}
-        showTotal={(total, range) =>
-          `${range[0]}-${range[1]} of ${total} items`
-        }
-      />
+      
     </div>
   );
 };
